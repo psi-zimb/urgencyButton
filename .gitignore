@@ -1,0 +1,13 @@
+*.class
+.settings
+.project
+.classpath
+target
+
+# Package Files #
+*.jar
+*.war
+*.ear
+.idea
+.DS_Store
+omod/.DS_Store
