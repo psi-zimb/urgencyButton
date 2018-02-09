@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<dataset>
+    <global_property property="patient.identifierRegex" property_value="^0*@SEARCH@([A-Z]+-[0-9])?$" uuid="c92cce6d-7e7d-4c53-a3c9-faaac17f8f8b"/>
+    <location location_id="1" name="Test Location" creator="1" date_created="2005-01-01 00:00:00.0" retired="false" uuid="92ab9667-4686-49af-8be8-65a4b58fc49c"/>
+    <concept concept_id="510" retired="0" datatype_id="4" class_id="5" is_set="0" creator="1" date_created="2014-09-18 14:18:05" uuid="e39a473c-a57a-4b29-b5ba-b02832c17b35"/>
+    <concept concept_id="511" retired="0" datatype_id="4" class_id="5" is_set="0" creator="1" date_created="2014-09-18 14:18:05" uuid="e39a473c-a57a-4b29-b5ba-b02832c13der"/>
+    <concept_class concept_class_id="5" name="LabTest" creator="1" date_created="2014-09-18 14:18:05" retired="0" uuid="435jjf-fd5r6-fgt4r56-tr56gf" />
+    <concept_name concept_name_id="10" concept_id="510" name="Microscopy" locale="en" locale_preferred="0" creator="1" date_created="2014-09-18 14:17:15" voided="0" uuid="hg7j8gf-a194-44f9-82a9-hy7ftn7s"/>
+    <concept_name concept_name_id="11" concept_id="511" name="Gram Stain" locale="en" locale_preferred="0" creator="1" date_created="2014-09-18 14:17:15" voided="0" uuid="hg7j8gf-a194-44f9-hf8gdn-6g7sdf"/>
+</dataset>
