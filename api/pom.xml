@@ -24,6 +24,18 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.bahmni.module</groupId>
+            <artifactId>bahmni-emr-api</artifactId>
+            <version>0.89-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>emrapi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.openmrs.api</groupId>
             <artifactId>openmrs-api</artifactId>
             <type>test-jar</type>
