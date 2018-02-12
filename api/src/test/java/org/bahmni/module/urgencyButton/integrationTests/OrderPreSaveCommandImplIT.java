@@ -18,25 +18,25 @@ public class OrderPreSaveCommandImplIT extends BaseModuleWebContextSensitiveTest
     private OrderPreSaveCommandImpl orderPreSaveCommand;
 
     @Test
-    public void shouldAddPriorityTextToTheUrgentLabOrders() throws Exception {
+    public void shouldAddUrgentTextToTheUrgentLabOrders() throws Exception {
         executeDataSet("conceptTestData.xml");
         BahmniEncounterTransaction bahmniEncounterTransaction = getBahmniTransaction("FIRST ORDER");
 
         BahmniEncounterTransaction actual = orderPreSaveCommand.update(bahmniEncounterTransaction);
 
-        Assert.assertEquals("Microscopy - Priority", actual.getOrders().get(0).getCommentToFulfiller());
+        Assert.assertEquals("Microscopy - Urgent", actual.getOrders().get(0).getCommentToFulfiller());
         Assert.assertEquals("Notes", actual.getOrders().get(1).getCommentToFulfiller());
     }
 
     @Test
-        public void shouldAddPriorityTextAlongWithNotesToTheUrgentLabOrders() throws Exception {
+        public void shouldAddUrgentTextAlongWithNotesToTheUrgentLabOrders() throws Exception {
             executeDataSet("conceptTestData.xml");
             BahmniEncounterTransaction bahmniEncounterTransaction = getBahmniTransaction("BOTH");
 
             BahmniEncounterTransaction actual = orderPreSaveCommand.update(bahmniEncounterTransaction);
 
-            Assert.assertEquals("Microscopy - Priority", actual.getOrders().get(0).getCommentToFulfiller());
-            Assert.assertEquals("Gram Stain - Priority, Notes", actual.getOrders().get(1).getCommentToFulfiller());
+            Assert.assertEquals("Microscopy - Urgent", actual.getOrders().get(0).getCommentToFulfiller());
+            Assert.assertEquals("Gram Stain - Urgent, Notes", actual.getOrders().get(1).getCommentToFulfiller());
         }
 
     private BahmniEncounterTransaction getBahmniTransaction(String addStatToOrder) {

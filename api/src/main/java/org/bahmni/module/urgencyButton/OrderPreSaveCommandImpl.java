@@ -15,6 +15,7 @@ import java.util.List;
 public class OrderPreSaveCommandImpl implements EncounterDataPreSaveCommand {
     private final String STAT = "STAT";
     private final String LAB_TEST = "LabTest";
+    private final String LAB_SET = "LabSet";
 
     @Override
     public BahmniEncounterTransaction update(BahmniEncounterTransaction bahmniEncounterTransaction) {
@@ -25,8 +26,8 @@ public class OrderPreSaveCommandImpl implements EncounterDataPreSaveCommand {
                 String conceptUuid = order.getConceptUuid();
                 Concept concept = Context.getConceptService().getConceptByUuid(conceptUuid);
                 String orderType = concept.getConceptClass().getName();
-                if(LAB_TEST.equals(orderType)) {
-                    String priority = concept.getName().getName() +" - Priority";
+                if(LAB_TEST.equals(orderType) || LAB_SET.equals(orderType)) {
+                    String priority = concept.getName().getName() +" - Urgent";
                     String comments = order.getCommentToFulfiller();
                     comments = StringUtils.isEmpty(comments) ? priority : priority.concat(", "+ comments);
                     order.setCommentToFulfiller(comments);

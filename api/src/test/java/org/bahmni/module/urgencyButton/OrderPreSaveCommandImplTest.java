@@ -50,7 +50,7 @@ public class OrderPreSaveCommandImplTest {
     }
 
     @Test
-    public void shouldNotDoAnyChangesWhenNoOrderIsPriority() {
+    public void shouldNotDoAnyChangesWhenNoOrderIsUrgent() {
         bahmniEncounterTransaction = getBahmniTransaction("");
 
         BahmniEncounterTransaction actual = orderPreSaveCommand.update(bahmniEncounterTransaction);
@@ -59,7 +59,7 @@ public class OrderPreSaveCommandImplTest {
     }
 
     @Test
-    public void shouldNotDoAnyChangesWhenOrdersArePriorityButNotLabOrders() {
+    public void shouldNotDoAnyChangesWhenOrdersAreUrgentButNotLabOrders() {
         bahmniEncounterTransaction = getBahmniTransaction("");
 
         setUpMocks();
@@ -71,7 +71,7 @@ public class OrderPreSaveCommandImplTest {
     }
 
     @Test
-    public void shouldAddPriorityWithTestNameToNotesWhenLabTestHaveUrgency() {
+    public void shouldAddUrgentWithTestNameToNotesWhenLabTestHaveUrgency() {
         bahmniEncounterTransaction = getBahmniTransaction("FIRST ORDER");
 
         setUpMocks();
@@ -88,12 +88,34 @@ public class OrderPreSaveCommandImplTest {
         verify(concept, times(1)).getName();
         verify(conceptName, times(1)).getName();
 
-        Assert.assertEquals("Microscopy - Priority", actual.getOrders().get(0).getCommentToFulfiller());
+        Assert.assertEquals("Microscopy - Urgent", actual.getOrders().get(0).getCommentToFulfiller());
         Assert.assertEquals("Notes", actual.getOrders().get(1).getCommentToFulfiller());
     }
 
     @Test
-    public void shouldAppendPriorityTextToTheExistingNotes() {
+    public void shouldAddUrgentWithTestNameToNotesWhenLabTestHaveUrgencyAndOrderTypeIsLabSet() {
+        bahmniEncounterTransaction = getBahmniTransaction("FIRST ORDER");
+
+        setUpMocks();
+        when(conceptClass.getName()).thenReturn("LabSet");
+        when(conceptName.getName()).thenReturn("Microscopy");
+
+        BahmniEncounterTransaction actual = orderPreSaveCommand.update(bahmniEncounterTransaction);
+
+        verifyStatic(VerificationModeFactory.times(1));
+        Context.getConceptService();
+        verify(conceptService, times(1)).getConceptByUuid("e39a473c-a57a-4b29-b5ba-b02832c17b35");
+        verify(concept, times(1)).getConceptClass();
+        verify(conceptClass, times(1)).getName();
+        verify(concept, times(1)).getName();
+        verify(conceptName, times(1)).getName();
+
+        Assert.assertEquals("Microscopy - Urgent", actual.getOrders().get(0).getCommentToFulfiller());
+        Assert.assertEquals("Notes", actual.getOrders().get(1).getCommentToFulfiller());
+    }
+
+    @Test
+    public void shouldAppendUrgentTextToTheExistingNotes() {
         bahmniEncounterTransaction = getBahmniTransaction("BOTH");
 
         setUpMocks();
@@ -113,8 +135,8 @@ public class OrderPreSaveCommandImplTest {
         verify(concept, times(2)).getName();
         verify(conceptName, times(2)).getName();
 
-        Assert.assertEquals("Microscopy - Priority", actual.getOrders().get(0).getCommentToFulfiller());
-        Assert.assertEquals("Gram Stain - Priority, Notes", actual.getOrders().get(1).getCommentToFulfiller());
+        Assert.assertEquals("Microscopy - Urgent", actual.getOrders().get(0).getCommentToFulfiller());
+        Assert.assertEquals("Gram Stain - Urgent, Notes", actual.getOrders().get(1).getCommentToFulfiller());
     }
 
     private void setUpMocks() {
